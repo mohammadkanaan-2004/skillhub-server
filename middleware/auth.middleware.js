@@ -15,6 +15,10 @@ export function authenticate(req, res, next) {
 
   const token = authHeader.split(" ")[1];
 
+  if (!token) {
+    return res.status(401).json({ ok: false, error: "Access denied. No token provided." });
+  }
+
   try {
     const decoded = jwt.verify(token, JWT_SECRET);
     req.user = decoded; // Attach user info (id, role, studentId) to the request
