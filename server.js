@@ -39,5 +39,11 @@ app.use("/api/courses",     coursesRoutes);
 app.use("/api/enrollments", enrollmentsRoutes);
 app.use("/api/stats",       statsRoutes);
 
+/* ── Global error handler ── */
+app.use((err, _req, res, _next) => {
+  console.error(err.stack);
+  res.status(500).json({ ok: false, error: "Internal server error" });
+});
+
 /* ── Start ── */
 app.listen(PORT, () => console.log(`SkillHub API running on http://localhost:${PORT}`));
