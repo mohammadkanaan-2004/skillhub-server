@@ -81,8 +81,8 @@ ALTER TABLE enrollments ADD COLUMN IF NOT EXISTS current_lesson_index INT DEFAUL
 -- =========================
 
 INSERT INTO users (email, password, role)
-VALUES ('admin@skillhub.com', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lmuG', 'admin')
-ON CONFLICT (email) DO NOTHING;
+VALUES ('admin@skillhub.com', '$2b$10$zjf6gscMdBjUo.pXOqC5heMtZ2VF0uxdAX6GR6njiNzCELVj9Dv7u', 'admin')
+ON CONFLICT (email) DO UPDATE SET password = EXCLUDED.password, role = EXCLUDED.role;
 
 -- =========================
 -- DEFAULT COURSES
